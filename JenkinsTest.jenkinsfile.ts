@@ -1,4 +1,6 @@
-// Jenkinsfile  
+// Jenkinsfile
+// Automate the testing of the Playwright test suite using Jenkins CI 
+// Jaan John
 
 pipeline {
     agent any
@@ -41,7 +43,7 @@ pipeline {
                 reportName: 'Playwright Test Report'
             ])
 
-            // Optional: Archive report artifacts
+            // Archive report artifacts
             archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
         }
 
