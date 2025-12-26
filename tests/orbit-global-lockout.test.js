@@ -4,7 +4,7 @@
 // we can only verify the initial rendered state of the lockout badges as shown in the HTML.
 // In the provided HTML:
 // - One mission has an "Individual" lockout badge
-// - Two missions have no lockout badge (empty <td>)
+// - Two missions have no lockout badge (empty)
 // This test checks that the column renders correctly based on the static content.
 // Jaan John
 

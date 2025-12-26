@@ -1,5 +1,5 @@
 // orbit-lockout-scenarios-static.test.ts
-// Playwright tests for lockout column behavior using the local static HTML mockup
+// Playwright tests for Global and mixed scenarios using the local static HTML mockup
 // Only the hard-coded "Individual" lockout is present — global/mixed scenarios are documented
 // Uses soft assertions for "expected limitations" so the suite passes overall
 // Jaan John
