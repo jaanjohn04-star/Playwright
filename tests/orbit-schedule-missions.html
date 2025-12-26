@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit - Schedule Missions</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        .header {
+            background-color: #002b56;
+            color: white;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .header-icons i {
+            font-size: 20px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        .container {
+            display: flex;
+            height: calc(100vh - 64px);
+        }
+        .sidebar {
+            width: 260px;
+            background-color: #ffffff;
+            border-right: 1px solid #e0e0e0;
+            padding-top: 20px;
+            overflow-y: auto;
+        }
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+        .sidebar-title {
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar li {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .sidebar li:hover {
+            background-color: #f0f8ff;
+        }
+        .sidebar li.active {
+            background-color: #e6f2ff;
+            color: #007bff;
+            font-weight: 600;
+            border-left: 4px solid #007bff;
+        }
+        .main {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        .page-title {
+            font-size: 36px;
+            color: #007bff;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            padding: 12px 16px;
+            width: 320px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        .weather-link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .weather-link i {
+            margin-right: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        thead {
+            background-color: #f8f9fa;
+        }
+        th {
+            text-align: left;
+            padding: 14px 12px;
+            font-weight: 500;
+            color: #444;
+            font-size: 14px;
+        }
+        th:last-child {
+            text-align: right;
+        }
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+        .status-circle {
+            font-size: 20px;
+        }
+        .status-gray { color: #aaa; }
+        .status-green { color: #28a745; }
+        .status-red { color: #dc3545; }
+        .lockout-badge {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+        }
+        .actions {
+            text-align: right;
+        }
+        .actions i {
+            margin-left: 16px;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .actions i:hover {
+            color: #007bff;
+        }
+        .footer-links {
+            margin-top: 40px;
+            color: #007bff;
+            font-size: 15px;
+        }
+        .robot-time {
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        .version {
+            position: fixed;
+            bottom: 12px;
+            right: 24px;
+            color: #aaa;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">Orbit™</div>
+        </div>
+        <div class="header-icons">
+            <i class="fas fa-cog"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Account</div>
+                <ul>
+                    <li>Orbit Settings</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Robots</div>
+                <ul>
+                    <li>Site Maps</li>
+                    <li class="active">Schedule Missions</li>
+                    <li>Missions and Actions</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Admin Settings</div>
+                <ul>
+                    <li>Alerts</li>
+                    <li>Data Management</li>
+                    <li>Spot</li>
+                    <li>Users</li>
+                    <li>User Roles</li>
+                    <li>Orbit Software</li>
+                    <li>Robot Software</li>
+                    <li>Scheduler</li>
+                    <li>Networks</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main">
+            <h1 class="page-title">Schedule Missions</h1>
+
+            <div class="top-controls">
+                <input type="text" class="search-box" placeholder="Search">
+                <a href="#" class="weather-link"><i class="fas fa-cloud-sun"></i> Weather Settings</a>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Can Run</th>
+                        <th>Robot Name</th>
+                        <th>Mission Name</th>
+                        <th>Schedule</th>
+                        <th>Next Start</th>
+                        <th>Current Lockouts</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-circle status-circle status-gray"></i></td>
+                        <td><strong>spot-BD-91890003</strong></td>
+                        <td>Safety Rounds</td>
+                        <td>From 10:30 AM, Repeat as often as possible</td>
+                        <td>Disabled</td>
+                        <td><span class="lockout-badge">Individual</span></td>
+                        <td class="actions">
+                            <i class="fas fa-sync-alt"></i>
+                            <i class="fas fa-file-alt"></i>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-play-circle status-circle status-green"></i></td>
+                        <td><strong>spot-BD-00130011</strong></td>
+                        <td>Pumps</td>
+                        <td>From 2:40 PM, Repeat as often as possible</td>
+                        <td>Currently running</td>
+                        <td></td>
+                        <td class="actions">
+                            <i class="fas fa-file-alt"></i>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-circle status-circle status-red"></i></td>
+                        <td><strong>spot-BD-01180011</strong></td>
+                        <td>Boilers</td>
+                        <td>From 11:14 AM, Repeat every 1 hour</td>
+                        <td>As soon as possible</td>
+                        <td></td>
+                        <td class="actions">
+                            <i class="fas fa-file-alt"></i>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="footer-links">
+                <a href="#">Download calendar (ical format)</a>
+            </div>
+
+            <div class="robot-time">
+                Robot time: December 25, 2025 at 3:42:18 PM EST
+            </div>
+        </main>
+    </div>
+
+    <div class="version">5.0.0</div>
+</body>
+</html>
