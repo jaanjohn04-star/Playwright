@@ -1,0 +1,28 @@
+# .gitlab-ci.yml
+# Jaan John 
+# GitLab CI/CD pipeline for Playwright end-to-end tests
+
+image: mcr.microsoft.com/playwright:v1.48.0-jammy  # Official image with Node + browsers
+
+stages:
+  - test
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .cache/playwright/
+
+playwright-tests:
+  stage: test
+  script:
+    - npm ci
+    - npx playwright install --with-deps
+    - npx playwright test
+  artifacts:
+    when: always          # Save even if tests fail
+    paths:
+      - playwright-report/
+      - test-results/
+      - screenshots/
+    expire_in: 30 days
