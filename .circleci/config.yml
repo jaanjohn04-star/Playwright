@@ -1,0 +1,49 @@
+# .circleci/config.yml
+# Jaan John
+# CircleCI pipeline for running Playwright end-to-end tests
+
+version: 2.1
+
+jobs:
+  playwright-tests:
+    docker:
+      - image: mcr.microsoft.com/playwright:latest  # Official Playwright image with Node + pre-installed browsers & deps
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      # Cache node_modules for faster runs
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "package-lock.json" }}
+            - v1-deps-
+
+      - run:
+          name: Install dependencies
+          command: npm ci
+
+      - save_cache:
+          key: v1-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Run Playwright tests
+          command: npx playwright test
+
+      - store_artifacts:  # Upload report & results for easy viewing in CircleCI UI (even if tests fail)
+          path: playwright-report
+          destination: playwright-report
+
+      - store_artifacts:
+          path: test-results
+          destination: test-results
+
+      - store_artifacts:
+          path: screenshots
+          destination: screenshots
+
+workflows:
+  test:
+    jobs:
+      - playwright-tests
