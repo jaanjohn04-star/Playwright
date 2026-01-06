@@ -1,0 +1,28 @@
+
+  "threats": [
+    {
+      "id": "threat-001",
+      "location": "lat:42.3601, lon:-71.0589",
+      "confidence": 0.92,
+      "type": "anomaly_detected",
+      "details": "Potential issue detected",
+      "timestamp": "2026-01-06T12:00:00Z"
+    },
+    {
+      "id": "threat-002",
+      "location": "lat:42.3615, lon:-71.0600",
+      "confidence": 0.68,
+      "type": "low_risk",
+      "details": "Minor irregularity",
+      "timestamp": "2026-01-06T12:05:00Z"
+    }
+  ],
+  "status": "active_scan",
+  "vesselId": "ACTUV-001"
+}
+
+{
+  "threats": [],
+  "status": "clear",
+  "vesselId": "ACTUV-001"
+}
